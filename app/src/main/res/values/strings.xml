@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CatsBankClient</string>
+    <string name="cats_list">Cats list</string>
+    <string name="btn_add_new_cat">add new Cat</string>
+    <string name="enter_text_about_cat">Enter text about Cat</string>
+    <string name="btn_select_image">select image</string>
+    <string name="select__image">please select an image.</string>
+    <string name="btn_back">back</string>
+    <string name="btn_save">save</string>
+    <string name="det_image">No image</string>
+    <string name="btn_search">search</string>
+    <string name="enter_id">enter id</string>
+    <string name="id">Id</string>
+    <string name="det_text_textView">Text about cat</string>
+    <string name="det_btn_redact">redact</string>
+</resources>
