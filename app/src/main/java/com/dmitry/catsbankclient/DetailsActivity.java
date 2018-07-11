@@ -108,6 +108,8 @@ public class DetailsActivity extends AppCompatActivity {
                 String[] elem = chosenImageUri.toString().split("/");
                 TextView imageName = (TextView) findViewById(R.id.det_textView_select_image);
                 imageName.setText("Image name - " + elem[elem.length - 1]);
+                ImageView imageView = (ImageView) findViewById(R.id.det_imageView);
+                imageView.setImageURI(chosenImageUri);
             }
         }
     }

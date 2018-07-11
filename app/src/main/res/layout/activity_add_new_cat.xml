@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_new_cat"
     android:layout_width="match_parent"
@@ -11,66 +12,72 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dmitry.catsbankclient.AddNewCatActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayout2">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="@string/enter_text_about_cat"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_about_cat"
-            android:textSize="18sp"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:lines="6"
-            android:id="@+id/editText_about_cat"
-            android:background="#d9d9d9"
-            android:maxLength="250"/>
+            <TextView
+                android:id="@+id/textView_about_cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_text_about_cat"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:text="@string/select__image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView_select_image"/>
+            <EditText
+                android:id="@+id/editText_about_cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#d9d9d9"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:maxLength="250"/>
 
-        <Button
-            android:text="@string/btn_select_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_select_image"/>
+            <ImageView
+                android:id="@+id/add_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="202dp"
+                app:srcCompat="@mipmap/ic_launcher"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView_select_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select__image"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+            <Button
+                android:id="@+id/btn_select_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_select_image"/>
 
-        <Button
-            android:text="@string/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_save"
-            android:layout_weight="1"/>
-        <Button
-            android:text="@string/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_back"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_save"/>
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_back"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

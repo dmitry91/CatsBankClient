@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dmitry.catsbankclient.controllers.CatsController;
@@ -65,6 +66,8 @@ public class AddNewCatActivity extends AppCompatActivity {
                 String[] elem = chosenImageUri.toString().split("/");
                 TextView imageName = (TextView) findViewById(R.id.textView_select_image);
                 imageName.setText("Image name - " + elem[elem.length - 1]);
+                ImageView imageView = (ImageView) findViewById(R.id.add_imageView);
+                imageView.setImageURI(chosenImageUri);
             }
         }
     }
