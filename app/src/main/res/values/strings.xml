@@ -13,4 +13,5 @@
     <string name="id">Id</string>
     <string name="det_text_textView">Text about cat</string>
     <string name="det_btn_redact">redact</string>
+    <string name="del_cat">delete cat</string>
 </resources>

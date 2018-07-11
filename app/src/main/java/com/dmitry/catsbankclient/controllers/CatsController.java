@@ -153,13 +153,34 @@ public class CatsController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.v("Upload", "success");
+                Log.v("Update", "success");
                 mActivity.onBackPressed();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("Upload error:", t.toString());
+                Log.e("Update error:", t.toString());
+            }
+        });
+    }
+
+    public void deleteCat(int id){
+        // Executing the query
+        Client client = new Client();
+        CatsApi catsApi = client.getCatsApi();
+        Call<ResponseBody> call;
+
+        call = catsApi.delCat(id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.v("Delete", "success");
+                mActivity.onBackPressed();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Delete error:", t.toString());
             }
         });
     }

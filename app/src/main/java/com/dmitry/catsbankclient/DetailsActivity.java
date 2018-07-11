@@ -76,17 +76,25 @@ public class DetailsActivity extends AppCompatActivity {
                     startActivityForResult(intent, 2);
                 }
             });
-
+            final CatsController controller = new CatsController(DetailsActivity.this);
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CatsController controller = new CatsController(DetailsActivity.this);
+
                     String realPath = "";
                     if (chosenImageUri != null) {
                         realPath = ImageFilePath.getPath(DetailsActivity.this, chosenImageUri);
                     }
                     String text = ((EditText) findViewById(R.id.det_editText_about_cat)).getText().toString();
                     controller.updateCat(idCat, text, realPath);
+                }
+            });
+
+            Button btnDel = (Button) findViewById(R.id.det_btn_del);
+            btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                controller.deleteCat(idCat);
                 }
             });
 
