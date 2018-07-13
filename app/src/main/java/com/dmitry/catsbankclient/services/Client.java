@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
 
-    private static String urlApi = "http://192.168.1.5:8080/"; // localhost:8080
+    private static String baseUrl = "http://192.168.1.5:8080/catsbank/"; // localhost:8080
 
     public Client() {
     }
@@ -16,7 +16,7 @@ public class Client {
     public CatsApi getCatsApi() {
         OkHttpClient client = new OkHttpClient.Builder().build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(urlApi)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

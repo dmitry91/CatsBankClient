@@ -18,17 +18,17 @@ import retrofit2.http.Path;
 
 public interface CatsApi {
 
-    @GET("getAllCats")
+    @GET("cats")
     Single<List<Cat>> getAllCats();
 
     @Multipart
-    @POST("addCat")
+    @POST("cat")
     Call<ResponseBody> addCat(@Part("text") RequestBody description,@Part MultipartBody.Part photo);
 
     @Multipart
-    @POST("updCat")
+    @POST("updcat")//I do not use "put", because an incomprehensible mistake in retrofit "code=400"
     Call<ResponseBody> updateCat(@Part("id") RequestBody id, @Part("text") RequestBody description,@Part MultipartBody.Part photo);
 
-    @DELETE("delCatById/{id}")
+    @DELETE("cat/{id}")
     Call<ResponseBody> delCat(@Path("id") int id);
 }

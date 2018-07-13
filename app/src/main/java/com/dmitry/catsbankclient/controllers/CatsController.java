@@ -109,7 +109,7 @@ public class CatsController {
 
     public void saveCat(String text, String path) {
         File file = new File(path);
-        RequestBody reqFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+        final RequestBody reqFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
         RequestBody textAboutCat = RequestBody.create(MediaType.parse("text/plain"), text);
         // Executing the query
@@ -124,7 +124,7 @@ public class CatsController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.v("Upload", "success");
+                Log.v("Upload", "success " + response);
                 mActivity.onBackPressed();
             }
 
@@ -153,7 +153,7 @@ public class CatsController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.v("Update", "success");
+                Log.v("Update", "success " + response);
                 mActivity.onBackPressed();
             }
 
@@ -174,7 +174,7 @@ public class CatsController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.v("Delete", "success");
+                Log.v("Delete", "success " + response);
                 mActivity.onBackPressed();
             }
 
