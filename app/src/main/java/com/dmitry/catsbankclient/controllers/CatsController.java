@@ -72,7 +72,7 @@ public class CatsController {
                 Bundle b = new Bundle();
                 b.putInt("id", catsForInsert.get(position).getId());
                 b.putString("text", catsForInsert.get(position).getText());
-                b.putString("photo", catsForInsert.get(position).getPhoto());
+                b.putString("photo", catsForInsert.get(position).getPhotoName());
                 intent.putExtras(b); //Put your data to your next Intent
                 mActivity.startActivity(intent);
             }

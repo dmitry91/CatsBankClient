@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
 
-    private static String baseUrl = "http://192.168.1.5:8080/catsbank/"; // localhost:8080
+    public static String baseUrl = "http://192.168.1.3:8080/catsbank/"; // localhost:8080
 
     public Client() {
     }

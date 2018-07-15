@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dmitry.catsbankclient.controllers.CatsController;
+import com.dmitry.catsbankclient.services.Client;
 import com.dmitry.catsbankclient.services.ImageFilePath;
 
 import java.util.Objects;
@@ -41,11 +43,13 @@ public class DetailsActivity extends AppCompatActivity {
             editText.setText(text);
 
             if (!Objects.equals(b.getString("photo"), null)) {
-                String photo;
-                photo = b.getString("photo");
+                String photoName;
+                photoName = b.getString("photo");
                 ImageView image = (ImageView) this.findViewById(R.id.det_imageView);
-                byte[] arr = Base64.decode(photo, Base64.DEFAULT);
-                image.setImageBitmap(BitmapFactory.decodeByteArray(arr, 0, arr.length));
+                Glide
+                        .with(this)
+                        .load(Client.baseUrl + "photo/{name}?name=" + photoName)
+                        .into(image);
             }
 
             final Button btnSelectImage = (Button) findViewById(R.id.det_btn_select_image);
@@ -113,11 +117,15 @@ public class DetailsActivity extends AppCompatActivity {
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 chosenImageUri = resultData.getData();
-                String[] elem = chosenImageUri.toString().split("/");
+                String path = ImageFilePath.getPath(this, chosenImageUri);
+                String[] elem = path.split("/");
                 TextView imageName = (TextView) findViewById(R.id.det_textView_select_image);
                 imageName.setText("Image name - " + elem[elem.length - 1]);
                 ImageView imageView = (ImageView) findViewById(R.id.det_imageView);
-                imageView.setImageURI(chosenImageUri);
+                Glide
+                        .with(this)
+                        .load(chosenImageUri)
+                        .into(imageView);
             }
         }
     }

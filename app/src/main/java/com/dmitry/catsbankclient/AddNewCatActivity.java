@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dmitry.catsbankclient.controllers.CatsController;
 import com.dmitry.catsbankclient.services.ImageFilePath;
 
@@ -63,11 +64,15 @@ public class AddNewCatActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 chosenImageUri = resultData.getData();
-                String[] elem = chosenImageUri.toString().split("/");
+                String path = ImageFilePath.getPath(this, chosenImageUri);
+                String[] elem = path.split("/");
                 TextView imageName = (TextView) findViewById(R.id.textView_select_image);
                 imageName.setText("Image name - " + elem[elem.length - 1]);
                 ImageView imageView = (ImageView) findViewById(R.id.add_imageView);
-                imageView.setImageURI(chosenImageUri);
+                Glide
+                        .with(this)
+                        .load(chosenImageUri)
+                        .into(imageView);
             }
         }
     }

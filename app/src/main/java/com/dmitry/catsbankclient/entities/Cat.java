@@ -6,15 +6,15 @@ public class Cat {
 
     private int id;
     private String text;
-    private String photo;
+    private String photoName;
 
     public Cat() {
     }
 
-    public Cat(int id, String text, String photo) {
+    public Cat(int id, String text, String photoName) {
         this.id = id;
         this.text = text;
-        this.photo = photo;
+        this.photoName = photoName;
     }
 
     public int getId() {
@@ -33,16 +33,16 @@ public class Cat {
         this.text = text;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhotoName() {
+        return photoName;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
 
     public byte[] getPhotoBytes(){
-        return Base64.decode(photo,Base64.DEFAULT);
+        return Base64.decode(photoName,Base64.DEFAULT);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Cat {
         return "Cat{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", photo=" + photo +
+                ", photoName=" + photoName +
                 '}';
     }
 }
