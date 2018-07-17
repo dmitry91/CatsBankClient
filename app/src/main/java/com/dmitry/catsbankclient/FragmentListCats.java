@@ -9,18 +9,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.dmitry.catsbankclient.controllers.CatsController;
+import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.presenter.PresenterCats;
 
 
 public class FragmentListCats extends Fragment {
 
-    private CatsController catsController;
+    private PresenterCats presenterCats;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list_all_cats, container,false);
-        catsController = new CatsController(getActivity(), v);
+        presenterCats = new PresenterCats();
+        presenterCats.setModelCats(new ModelCats(getActivity(), v));
 
         Button btnAddCat = (Button) v.findViewById(R.id.btn_add_cat);
         btnAddCat.setOnClickListener(new View.OnClickListener() {
@@ -40,9 +42,9 @@ public class FragmentListCats extends Fragment {
             public void onClick(View v) {
                 String number = ((EditText) getView().findViewById(R.id.editText_search)).getText().toString();
                 if (number.equals("")) { // detect an empty string and set it to "0" search
-                    catsController.findCatOnListById(0);
+                    presenterCats.findCatOnListById(0);
                 } else {
-                    catsController.findCatOnListById(Integer.parseInt(number));
+                    presenterCats.findCatOnListById(Integer.parseInt(number));
                 }
             }
         });
@@ -52,6 +54,6 @@ public class FragmentListCats extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        catsController.getAllCats();
+        presenterCats.getAllCats();
     }
 }

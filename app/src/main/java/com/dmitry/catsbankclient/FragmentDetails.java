@@ -15,12 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dmitry.catsbankclient.controllers.CatsController;
+import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.presenter.PresenterCats;
 import com.dmitry.catsbankclient.services.Client;
 import com.dmitry.catsbankclient.services.ImageFilePath;
 
 import java.util.Objects;
-
 
 public class FragmentDetails extends Fragment {
 
@@ -82,7 +82,8 @@ public class FragmentDetails extends Fragment {
                     startActivityForResult(intent, 2);
                 }
             });
-            final CatsController controller = new CatsController(getActivity());
+            final PresenterCats presenterCats = new PresenterCats();
+            presenterCats.setModelCats(new ModelCats(getActivity()));
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -92,7 +93,7 @@ public class FragmentDetails extends Fragment {
                         realPath = ImageFilePath.getPath(v.getContext(), chosenImageUri);
                     }
                     String text = ((EditText) getActivity().findViewById(R.id.det_editText_about_cat)).getText().toString();
-                    controller.updateCat(idCat, text, realPath);
+                    presenterCats.updateCat(idCat, text, realPath);
                 }
             });
 
@@ -100,7 +101,7 @@ public class FragmentDetails extends Fragment {
             btnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    controller.deleteCat(idCat);
+                    presenterCats.deleteCat(idCat);
                 }
             });
 

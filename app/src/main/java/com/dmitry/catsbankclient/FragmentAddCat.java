@@ -1,6 +1,5 @@
 package com.dmitry.catsbankclient;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,7 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dmitry.catsbankclient.controllers.CatsController;
+import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.presenter.PresenterCats;
 import com.dmitry.catsbankclient.services.ImageFilePath;
 
 public class FragmentAddCat extends Fragment {
@@ -51,14 +51,14 @@ public class FragmentAddCat extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CatsController controller = new CatsController(getActivity());
-
+                PresenterCats presenterCats = new PresenterCats();
+                presenterCats.setModelCats(new ModelCats(getActivity()));
                 String realPath = "";
                 if (chosenImageUri != null) {
                     realPath = ImageFilePath.getPath(getActivity(), chosenImageUri);
                 }
                 String text = ((EditText) getActivity().findViewById(R.id.editText_about_cat)).getText().toString();
-                controller.saveCat(text, realPath);
+                presenterCats.saveCat(text, realPath);
             }
         });
         return v;
