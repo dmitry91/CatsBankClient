@@ -1,7 +1,8 @@
 package com.dmitry.catsbankclient.controllers;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.dmitry.catsbankclient.DetailsActivity;
+import com.dmitry.catsbankclient.FragmentDetails;
 import com.dmitry.catsbankclient.R;
 import com.dmitry.catsbankclient.entities.Cat;
 import com.dmitry.catsbankclient.services.Client;
@@ -38,10 +39,12 @@ public class CatsController {
     private ListView lvMain;
     private ArrayList<Cat> catsList;
     private Activity mActivity;
+    private FragmentTransaction fragmentTransaction;
 
     public CatsController(Activity activity, View view) {
         mActivity = activity;
-        lvMain = (ListView) view;
+        lvMain = view.findViewById(R.id.lvMain);
+        fragmentTransaction = mActivity.getFragmentManager().beginTransaction();
     }
 
     public CatsController(Activity activity) {
@@ -68,13 +71,15 @@ public class CatsController {
         lvMain.setAdapter(adapter);
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mActivity, DetailsActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("id", catsForInsert.get(position).getId());
                 b.putString("text", catsForInsert.get(position).getText());
                 b.putString("photo", catsForInsert.get(position).getPhotoName());
-                intent.putExtras(b); //Put your data to your next Intent
-                mActivity.startActivity(intent);
+                FragmentDetails fragmentDetails = new FragmentDetails();
+                fragmentDetails.setArguments(b);
+                fragmentTransaction.replace(R.id.fragmentContainer,fragmentDetails);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }

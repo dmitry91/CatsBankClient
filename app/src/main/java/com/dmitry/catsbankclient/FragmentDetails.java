@@ -2,12 +2,13 @@ package com.dmitry.catsbankclient;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.support.annotation.Nullable;
+import android.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,42 +21,43 @@ import com.dmitry.catsbankclient.services.ImageFilePath;
 
 import java.util.Objects;
 
-public class DetailsActivity extends AppCompatActivity {
+
+public class FragmentDetails extends Fragment {
 
     private boolean redactFlag;
     private Uri chosenImageUri;
+    private View v;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-        Bundle b = getIntent().getExtras();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_details, container,false);
+        Bundle b = this.getArguments();
         final int idCat;
 
         if (b != null) {
             idCat = b.getInt("id");
-            TextView idView = (TextView) findViewById(R.id.det_id_textView);
+            TextView idView = (TextView) v.findViewById(R.id.det_id_textView);
             idView.setText("id: " + idCat);
 
             final String text;
             text = b.getString("text");
-            final EditText editText = (EditText) findViewById(R.id.det_editText_about_cat);
+            final EditText editText = (EditText) v.findViewById(R.id.det_editText_about_cat);
             editText.setText(text);
 
             if (!Objects.equals(b.getString("photo"), null)) {
                 String photoName;
                 photoName = b.getString("photo");
-                ImageView image = (ImageView) this.findViewById(R.id.det_imageView);
+                ImageView image = (ImageView) v.findViewById(R.id.det_imageView);
                 Glide
                         .with(this)
                         .load(Client.baseUrl + "photo/{name}?name=" + photoName)
                         .into(image);
             }
 
-            final Button btnSelectImage = (Button) findViewById(R.id.det_btn_select_image);
-            final Button btnSave = (Button) findViewById(R.id.det_btn_save);
+            final Button btnSelectImage = (Button) v.findViewById(R.id.det_btn_select_image);
+            final Button btnSave = (Button) v.findViewById(R.id.det_btn_save);
             redactFlag = false;
-            Button redact = (Button) findViewById(R.id.det_btn_redact);
+            Button redact = (Button) v.findViewById(R.id.det_btn_redact);
             redact.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,36 +82,37 @@ public class DetailsActivity extends AppCompatActivity {
                     startActivityForResult(intent, 2);
                 }
             });
-            final CatsController controller = new CatsController(DetailsActivity.this);
+            final CatsController controller = new CatsController(getActivity());
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     String realPath = "";
                     if (chosenImageUri != null) {
-                        realPath = ImageFilePath.getPath(DetailsActivity.this, chosenImageUri);
+                        realPath = ImageFilePath.getPath(v.getContext(), chosenImageUri);
                     }
-                    String text = ((EditText) findViewById(R.id.det_editText_about_cat)).getText().toString();
+                    String text = ((EditText) getActivity().findViewById(R.id.det_editText_about_cat)).getText().toString();
                     controller.updateCat(idCat, text, realPath);
                 }
             });
 
-            Button btnDel = (Button) findViewById(R.id.det_btn_del);
+            Button btnDel = (Button) v.findViewById(R.id.det_btn_del);
             btnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                controller.deleteCat(idCat);
+                    controller.deleteCat(idCat);
                 }
             });
 
-            Button btnBack = (Button) findViewById(R.id.det_btn_back);
+            Button btnBack = (Button) v.findViewById(R.id.det_btn_back);
             btnBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onBackPressed();
+                    getFragmentManager().popBackStack();
                 }
             });
         }
+        return v;
     }
 
     @Override
@@ -117,11 +120,11 @@ public class DetailsActivity extends AppCompatActivity {
         if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 chosenImageUri = resultData.getData();
-                String path = ImageFilePath.getPath(this, chosenImageUri);
+                String path = ImageFilePath.getPath(getActivity(), chosenImageUri);
                 String[] elem = path.split("/");
-                TextView imageName = (TextView) findViewById(R.id.det_textView_select_image);
+                TextView imageName = (TextView) v.findViewById(R.id.det_textView_select_image);
                 imageName.setText("Image name - " + elem[elem.length - 1]);
-                ImageView imageView = (ImageView) findViewById(R.id.det_imageView);
+                ImageView imageView = (ImageView) v.findViewById(R.id.det_imageView);
                 Glide
                         .with(this)
                         .load(chosenImageUri)

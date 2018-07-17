@@ -1,17 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_details"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dmitry.catsbankclient.DetailsActivity">
-
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_weight="0.49"
+                android:layout_weight="5.70"
                 android:contentDescription="@string/det_image"
                 app:srcCompat="@mipmap/ic_launcher"/>
 
@@ -93,11 +85,11 @@
             </LinearLayout>
 
             <Button
-                android:text="@string/del_cat"
+                android:id="@+id/det_btn_del"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/det_btn_del"
-                android:layout_weight="0.13"/>
+                android:layout_weight="0.13"
+                android:text="@string/del_cat"/>
 
             <Button
                 android:id="@+id/det_btn_back"
@@ -109,4 +101,4 @@
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
