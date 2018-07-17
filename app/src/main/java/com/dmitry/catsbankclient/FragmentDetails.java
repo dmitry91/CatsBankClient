@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.models.ModelCat;
 import com.dmitry.catsbankclient.presenter.PresenterCats;
 import com.dmitry.catsbankclient.services.Client;
 import com.dmitry.catsbankclient.services.ImageFilePath;
@@ -83,7 +83,7 @@ public class FragmentDetails extends Fragment {
                 }
             });
             final PresenterCats presenterCats = new PresenterCats();
-            presenterCats.setModelCats(new ModelCats(getActivity()));
+            presenterCats.setModelCats(new ModelCat(getActivity()));
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

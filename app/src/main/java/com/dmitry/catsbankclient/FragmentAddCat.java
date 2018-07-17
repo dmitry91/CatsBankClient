@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.models.ModelCat;
 import com.dmitry.catsbankclient.presenter.PresenterCats;
 import com.dmitry.catsbankclient.services.ImageFilePath;
 
@@ -52,7 +52,7 @@ public class FragmentAddCat extends Fragment {
             @Override
             public void onClick(View v) {
                 PresenterCats presenterCats = new PresenterCats();
-                presenterCats.setModelCats(new ModelCats(getActivity()));
+                presenterCats.setModelCats(new ModelCat(getActivity()));
                 String realPath = "";
                 if (chosenImageUri != null) {
                     realPath = ImageFilePath.getPath(getActivity(), chosenImageUri);

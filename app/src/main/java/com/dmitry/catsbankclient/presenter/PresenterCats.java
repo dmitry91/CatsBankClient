@@ -1,35 +1,35 @@
 package com.dmitry.catsbankclient.presenter;
 
-import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.models.ModelCat;
 
 public class PresenterCats {
 
-    private ModelCats modelCats;
+    private ModelCat modelCat;
 
     public PresenterCats() {
     }
 
-    public void setModelCats(ModelCats modelCats) {
-        this.modelCats = modelCats;
+    public void setModelCats(ModelCat modelCat) {
+        this.modelCat = modelCat;
     }
 
     public void getAllCats(){
-        modelCats.getAllCats();
+        modelCat.getAllCats();
     }
 
     public void findCatOnListById(int idCat){
-        modelCats.findCatOnListById(idCat);
+        modelCat.findCatOnListById(idCat);
     }
 
     public void updateCat(int id, String text, String path){
-        modelCats.updateCat(id, text, path);
+        modelCat.updateCat(id, text, path);
     }
 
     public void deleteCat(int idCat){
-        modelCats.deleteCat(idCat);
+        modelCat.deleteCat(idCat);
     }
 
     public void saveCat(String text, String path){
-        modelCats.saveCat(text, path);
+        modelCat.saveCat(text, path);
     }
 }

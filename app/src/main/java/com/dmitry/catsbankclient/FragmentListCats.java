@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.dmitry.catsbankclient.models.ModelCats;
+import com.dmitry.catsbankclient.models.ModelCat;
 import com.dmitry.catsbankclient.presenter.PresenterCats;
 
 
@@ -22,7 +22,7 @@ public class FragmentListCats extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list_all_cats, container,false);
         presenterCats = new PresenterCats();
-        presenterCats.setModelCats(new ModelCats(getActivity(), v));
+        presenterCats.setModelCats(new ModelCat(getActivity(), v));
 
         Button btnAddCat = (Button) v.findViewById(R.id.btn_add_cat);
         btnAddCat.setOnClickListener(new View.OnClickListener() {
